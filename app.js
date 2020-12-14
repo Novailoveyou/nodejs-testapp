@@ -1,3 +1,4 @@
+const { RSA_NO_PADDING } = require('constants')
 const http = require('http')
 const { getItems, getItem, createItem, updateItem, deleteItem } = require('./controllers/itemController')
 
@@ -21,6 +22,8 @@ const server = http.createServer((req, res) => {
   }else if(req.url.match(/\/api\/items\/([0-9]+)/) && req.method === 'DELETE'){
     const id = req.url.split('/')[3]
     deleteItem(req,res, id)
+  }else if(req.url.includes('./well-known/acme-challenge')){
+    res.statusCode = 200
   }else{
     res.writeHead(404, { 'Content-Type' : 'application/json' })
     res.end(JSON.stringify({ message: 'Route Not Found'}))

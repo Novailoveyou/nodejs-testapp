@@ -34,17 +34,17 @@ async function getItem(req, res, id){
 }
 
 // @desc    Create an Item
-// @route   GET /api/items
+// @route   POST /api/items
 async function createItem(req, res){
   try{
     
     const body = await getPostData(req)
 
-    const { title, desc, price } = JSON.parse(body)
+    const { title, description, price } = JSON.parse(body)
 
     const item = {
       title,
-      desc,
+      description,
       price
     }
 
