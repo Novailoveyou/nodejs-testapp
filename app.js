@@ -14,6 +14,20 @@ const server = http.createServer((req, res) => {
     // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
     // console.log(res.connection({routes: {cors: true}}));
     // console.log(res.connection);
+    
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', '*');
+
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET');
+
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', true);
+
     getItems(req, res)
   }else if(req.url.match(/\/api\/items\/([0-9]+)/) && req.method === 'GET'){
     const id = req.url.split('/')[3]
