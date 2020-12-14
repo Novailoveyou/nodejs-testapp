@@ -10,23 +10,28 @@ const server = http.createServer((req, res) => {
   // res.end()
 
   if((req.url === '/api/items' || req.url === '/api/items/') && req.method === 'GET'){
+    // res.header("Access-Control-Allow-Origin", "*")
+    // res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
+    // console.log(res.connection({routes: {cors: true}}));
+    // console.log(res.connection);
     getItems(req, res)
   }else if(req.url.match(/\/api\/items\/([0-9]+)/) && req.method === 'GET'){
     const id = req.url.split('/')[3]
     getItem(req, res, id)
-  }else if(req.url === '/api/items' || req.url === '/api/items/' && req.method === 'POST'){
-    createItem(req, res)
-  }else if(req.url.match(/\/api\/items\/([0-9]+)/) && req.method === 'PUT'){
-    const id = req.url.split('/')[3]
-    updateItem(req,res, id)
-  }else if(req.url.match(/\/api\/items\/([0-9]+)/) && req.method === 'DELETE'){
-    const id = req.url.split('/')[3]
-    deleteItem(req,res, id)
-  }else if(req.url.includes('/.well-known') && req.method === 'GET'){
+  }
+  // else if(req.url === '/api/items' || req.url === '/api/items/' && req.method === 'POST'){
+  //   createItem(req, res)
+  // }else if(req.url.match(/\/api\/items\/([0-9]+)/) && req.method === 'PUT'){
+  //   const id = req.url.split('/')[3]
+  //   updateItem(req,res, id)
+  // }else if(req.url.match(/\/api\/items\/([0-9]+)/) && req.method === 'DELETE'){
+  //   const id = req.url.split('/')[3]
+  //   deleteItem(req,res, id)
+  // }
+  else if(req.url.includes('/.well-known') && req.method === 'GET'){
     const id = req.url.split('/')[3]
     res.statusCode = 200
     res.end(id)
-    console.log(id);
   }else{
     res.writeHead(404, { 'Content-Type' : 'application/json' })
     res.end(JSON.stringify({ message: 'Route Not Found'}))

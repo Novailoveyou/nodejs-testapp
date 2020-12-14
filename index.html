@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <script>
+    async function getPrograms() {
+      // {
+      //   method:'GET',
+      //   headers:{
+      //       'Accept':'application/json',
+      //       'Content-Type':'application/json',
+      //   },
+      //   mode:'no-cors'
+      // }
+      const response = await fetch('https://cors-anywhere.herokuapp.com/https://ipo-cp.ru/api/items')
+      console.log(response);
+      const data = await response.json()
+      
+      console.log(data);
+    }
+    getPrograms()
+  </script>
+</body>
+</html>
